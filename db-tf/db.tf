@@ -13,6 +13,8 @@ resource "aws_db_instance" "m2-integration" {
   password             = "Cd$mage911" #minimum 8 chars
   parameter_group_name = "default.mariadb10.3"
   db_subnet_group_name = "default-vpc-fd5a909b"
+  final_snapshot_identifier = "finaldb"
+  identifier = "intdb"
 
   tags {
     Name        = "stores-integration-test"
