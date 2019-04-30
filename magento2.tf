@@ -10,7 +10,7 @@ resource "aws_instance" "stores-magento2-test" {
   ami                    = "ami-14c5486b" #Amazon Linux AMI, change this to CentOS7 eventually
   instance_type          = "t2.medium"      
   key_name               = "stores-magento2-test"
-  vpc_security_group_ids = ["sg-0d40797d"]
+  vpc_security_group_ids = ["08fe4531da2709b6f"]
   subnet_id              = "subnet-811b7dda"
   private_ip             = "172.26.175.213" #Make sure no one else is using this IP in the console
 
