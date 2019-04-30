@@ -24,3 +24,4 @@ resource "aws_instance" "stores-magento2-test" {
     Application = "Stores"
   }
 }
+test
