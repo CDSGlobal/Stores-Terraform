@@ -1,3 +1,6 @@
 *.terraform
 *.idea
 *.DS_Store
+*.terraform.tfstate
+*.pem
+*.terraform.*

@@ -8,7 +8,7 @@ provider "aws" {
 
 resource "aws_instance" "stores-integration-test" {
   ami                    = "ami-14c5486b" #Amazon Linux AMI, change this to CentOS7 eventually
-  instance_type          = "t2.medium"      
+  instance_type          = "t2.2xlarge"      
   key_name               = "stores-integration-test" #Create this before running terraform commands or server will not create
   vpc_security_group_ids = ["sg-0d40797d"]
   subnet_id              = "subnet-811b7dda" #Depending on this ID your instance may or may not be accessible to certain IP ranges
@@ -27,8 +27,19 @@ resource "aws_instance" "stores-integration-test" {
   user_data = <<HEREDOC
   #!/bin/bash
 
+  echo "===> Create the mageuser and magegroup"
+  sudo adduser mageuser
+  sudo groupadd magegroup
+  sudo usermod -g magegroup mageuser
+
+  echo "===> Create Magento 2 document root"
+  sudo mkdir /opt/magento/demo
+
+  echo "===> Change apache user to mageuser"
+
+
   echo "===> Installing PHP 71"
-  yum install -y php71-mcrypt php71-gd php71 php71-opcache php71-cli php71-common php71-gd php71-mbstring php71-mcrypt php71-pdo php71-xml php71-mysqlnd php71-bcmath php71-ctype php71-dom php71-mhash php71-mcrypt php71-curl php71-intl php71-xsl php71-openssl php71-zip php71-soap php71-pecl-xdebug
+  yum install -y php72-mcrypt php72-gd php72 php72-opcache php72-cli php72-common php72-gd php72-mbstring php72-mcrypt php72-pdo php72-xml php72-mysqlnd php72-bcmath php72-ctype php72-dom php72-mhash php72-mcrypt php72-curl php72-intl php72-xsl php72-openssl php72-zip php72-soap php72-pecl-xdebug
 
   echo "===> Downloading composer installer"
   php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"

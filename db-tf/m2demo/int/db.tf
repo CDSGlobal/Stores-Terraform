@@ -12,8 +12,8 @@ resource "aws_db_instance" "m2-integration" {
   username             = "magento"
   password             = "Cd$mage911" #minimum 8 chars
   parameter_group_name = "default.mariadb10.3"
-  db_subnet_group_name = "default-vpc-fd5a909b"
-  final_snapshot_identifier = "finaldb"
+  db_subnet_group_name = "default-vpc-19e3497f"
+  skip_final_snapshot = "true"
   identifier = "intdb"
 
   tags {
