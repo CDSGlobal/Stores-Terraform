@@ -6,13 +6,13 @@ provider "aws" {
 #us-west-2 Oregon
 }
 
-resource "aws_instance" "stores-magento2-test" {
-  ami                    = "ami-14c5486b" #Amazon Linux AMI, change this to CentOS7 eventually
-  instance_type          = "t2.large"
-  key_name               = "basem2"
+resource "aws_instance" "QA_Bauer" {
+  ami                    = "ami-0dd680d307a0b88cf"
+  instance_type          = "t2.large"      
+  key_name               = "QA_Bauer"
   vpc_security_group_ids = ["sg-0d40797d"]
   subnet_id              = "subnet-811b7dda"
-  private_ip             = "172.26.175.216" #Make sure no one else is using this IP in the console
+  private_ip             = "172.26.175.215" #Make sure no one else is using this IP in the console
 
   root_block_device {
     volume_type = "gp2"
@@ -20,12 +20,15 @@ resource "aws_instance" "stores-magento2-test" {
   }
 
   tags {
-    Name        = "basem2"
+    Name        = "QA_Bauer"
     Application = "Stores"
   }
 
   user_data = <<HEREDOC
   #!/bin/bash
+
+  echo "===> Create Application Root"
+  
 
   echo "===> Installing PHP 72"
   yum install -y php72-mcrypt php72-gd php72 php72-opcache php72-cli php72-common php72-gd php72-mbstring php72-mcrypt php72-pdo php72-xml php72-mysqlnd php72-bcmath php72-ctype php72-dom php72-mhash php72-mcrypt php72-curl php72-intl php72-xsl php72-openssl php72-zip php72-soap php72-pecl-xdebug
@@ -33,11 +36,15 @@ resource "aws_instance" "stores-magento2-test" {
   echo "===> Downloading composer installer"
   php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 
-  echo "===> Installing composer
+  echo "===> Installing composer"
   sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
   echo "===> Installing git"
   yum -y install git
+
+  echo "===> Cloning git repository"
+  sudo mkdir /opt/aws/m2/
+  sudo git clone https://cds-magento2:6b952e1b42b6260378e0e58ae83a62a10d12b5a9@github.com/CDSGlobal/m2-module-authorization.git /opt/aws/m2
 
   echo "===> Public key of machine"
   cat ~/.ssh/id_rsa.pub

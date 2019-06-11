@@ -33,7 +33,7 @@ resource "aws_instance" "stores-magento2-test" {
   echo "===> Downloading composer installer"
   php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 
-  echo "===> Installing composer
+  echo "===> Installing composer"
   sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
   echo "===> Installing git"
