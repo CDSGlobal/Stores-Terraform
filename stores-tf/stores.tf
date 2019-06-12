@@ -10,9 +10,9 @@ resource "aws_instance" "stores-tf" {
   ami                    = "ami-01be326d846e4b0eb" #Official CentOS76 AMI from The CentOS Project
   instance_type          = "t2.small"      
   key_name               = "stores-tf" #Name of the private key, don't forget to create this on the console to ssh in
-  vpc_security_group_ids = ["sg-05f5ff342707c5c0d"] #Security Group created specifically for Magento 2
-  subnet_id              = "subnet-0b0572cf745bd98e1"
-  private_ip             = "" #Make sure no one else is using this IP in the console
+  vpc_security_group_ids = ["sg-0d40797d"] #Security Group created specifically for Magento 2
+  subnet_id              = "subnet-811b7dda"
+  private_ip             = "172.26.175.218" #Make sure no one else is using this IP in the console
   iam_instance_profile   = "S3AdminAccess" #Allow access to S3 buckets to pull http file
 
   root_block_device {
