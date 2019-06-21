@@ -16,8 +16,8 @@ resource "aws_db_instance" "basem2" {
   skip_final_snapshot = "true"
   identifier = "m2demo"
 
-  tags {
+  tags = {
     Name        = "m2demo"
     Application = "Magento2"
-  }
+         }
 }
