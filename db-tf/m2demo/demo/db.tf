@@ -2,7 +2,7 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_db_instance" "basem2" {
+resource "aws_db_instance" "m2demo" {
   allocated_storage    = 20
   storage_type         = "gp2"
   engine               = "mariadb"
@@ -16,8 +16,8 @@ resource "aws_db_instance" "basem2" {
   skip_final_snapshot = "true"
   identifier = "m2demo"
 
-  tags {
+  tags = { 
     Name        = "m2demo"
     Application = "Magento2"
-  }
+         }
 }
